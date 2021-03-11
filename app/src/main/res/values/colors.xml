@@ -8,4 +8,5 @@
     <color name="secondaryDarkColor">#0000b3</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
+    <color name="githubBannerColor">#26272b</color>
 </resources>

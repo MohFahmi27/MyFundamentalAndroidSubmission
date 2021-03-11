@@ -1,10 +1,12 @@
 package com.mfahmi.myfundamentalandroid.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.mfahmi.myfundamentalandroid.DetailActivity
 import com.mfahmi.myfundamentalandroid.databinding.ItemUserLayoutBinding
 import com.mfahmi.myfundamentalandroid.model.User
 
@@ -32,7 +34,9 @@ class GithubUserAdapter(private val arrayListUser: ArrayList<User>) :
                 tvUsername.text = user.username
             }
             itemView.setOnClickListener {
-
+                val intent = Intent(itemView.context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_DETAIL, user)
+                itemView.context.startActivity(intent)
             }
         }
     }

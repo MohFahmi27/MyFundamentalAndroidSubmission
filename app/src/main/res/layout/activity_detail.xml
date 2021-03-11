@@ -4,6 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryColor"
     tools:context=".DetailActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="280dp"
+        android:contentDescription="@string/github_banner"
+        android:scaleType="centerCrop"
+        android:src="@drawable/github_banner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_detail_user"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:civ_border_color="@color/primaryTextColor"
+        app:civ_border_width="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.62"
+        tools:src="@drawable/user1" />
+
+    <TextView
+        android:id="@+id/tv_name_detail"
+        style="@style/DefaultTextView"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/img_detail_user"
+        app:layout_constraintStart_toStartOf="@+id/img_detail_user"
+        app:layout_constraintTop_toBottomOf="@+id/img_detail_user"
+        tools:text="Mohammad Fahmi" />
+
+    <TextView
+        android:id="@+id/tv_username_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/tv_name_detail"
+        app:layout_constraintStart_toStartOf="@+id/tv_name_detail"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_detail"
+        tools:text="\@MohFhmi27" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/detail_layout_ext"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <include
+        android:id="@+id/location_include"
+        layout="@layout/location_layout_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintStart_toStartOf="@+id/include"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <include
+        android:id="@+id/user_info_include"
+        layout="@layout/info_user_include"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/location_include"
+        app:layout_constraintStart_toStartOf="@+id/location_include"
+        app:layout_constraintTop_toBottomOf="@+id/location_include" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
