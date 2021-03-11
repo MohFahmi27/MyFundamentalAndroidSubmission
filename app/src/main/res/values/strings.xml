@@ -1,4 +1,108 @@
 <resources>
     <string name="app_name">Github App</string>
 
+    <string-array name="username">
+        <item>MohFahmi27</item>
+        <item>nblakbar10</item>
+        <item>rafflypohan</item>
+        <item>cotinico</item>
+        <item>martinbonnin</item>
+        <item>autonomousapps</item>
+        <item>n8ebel</item>
+        <item>runningcode</item>
+        <item>LouisCAD</item>
+        <item>soulcramer</item>
+    </string-array>
+
+    <string-array name="name">
+        <item>Mohammad Fahmi</item>
+        <item>Nabil Akbar Pratama</item>
+        <item>Raffly Pohan</item>
+        <item>Nicola Corti</item>
+        <item>Martin Bonnin</item>
+        <item>Tony Robalik</item>
+        <item>Nate Ebel</item>
+        <item>Nelson Osacky</item>
+        <item>Louis CAD</item>
+        <item>Scott Rayapoullé</item>
+    </string-array>
+
+    <string-array name="location">
+        <item>Samarinda, Indonesia</item>
+        <item>Samarinda, Indonesia</item>
+        <item>Balikpapan, Indonesia</item>
+        <item>Stockholm, Sweden</item>
+        <item>Paris, France</item>
+        <item>Seattle, WA, USA</item>
+        <item>Washington, USA</item>
+        <item>Berlin, Germany</item>
+        <item>Paris, France</item>
+        <item>Paris, France</item>
+    </string-array>
+
+    <array name="repository">
+        <item>25</item>
+        <item>29</item>
+        <item>25</item>
+        <item>86</item>
+        <item>166</item>
+        <item>48</item>
+        <item>20</item>
+        <item>106</item>
+        <item>113</item>
+        <item>37</item>
+    </array>
+
+    <string-array name="company">
+        <item>Institut Teknologi Kalimantan</item>
+        <item>Institut Teknologi Kalimantan</item>
+        <item>Institut Teknologi Kalimantan</item>
+        <item>Spotify</item>
+        <item>Apollo GraphGL</item>
+        <item>Square, Inc</item>
+        <item>Premise Data</item>
+        <item>Gradle</item>
+        <item>Beepiz</item>
+        <item>Xebia France</item>
+    </string-array>
+
+    <array name="followers">
+        <item>5</item>
+        <item>4</item>
+        <item>4</item>
+        <item>633</item>
+        <item>99</item>
+        <item>100</item>
+        <item>223</item>
+        <item>258</item>
+        <item>499</item>
+        <item>20</item>
+    </array>
+
+    <array name="following">
+        <item>9</item>
+        <item>8</item>
+        <item>5</item>
+        <item>90</item>
+        <item>5</item>
+        <item>1</item>
+        <item>4</item>
+        <item>60</item>
+        <item>68</item>
+        <item>13</item>
+    </array>
+
+    <array name="profile_pict">
+        <item>@drawable/user1</item>
+        <item>@drawable/user2</item>
+        <item>@drawable/user3</item>
+        <item>@drawable/user4</item>
+        <item>@drawable/user5</item>
+        <item>@drawable/user6</item>
+        <item>@drawable/user7</item>
+        <item>@drawable/user8</item>
+        <item>@drawable/user9</item>
+        <item>@drawable/user10</item>
+    </array>
+
 </resources>
