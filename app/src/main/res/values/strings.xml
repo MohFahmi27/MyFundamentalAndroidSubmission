@@ -4,7 +4,7 @@
     <string name="repositories">repositories</string>
     <string name="followers">followers</string>
     <string name="following">following</string>
-    <string name="username_placeholder">\@%1$ss</string>
+    <string name="username_placeholder">\@%1$s</string>
 
     <string-array name="username">
         <item>MohFahmi27</item>
