@@ -11,14 +11,13 @@
         android:layout_height="wrap_content"
         android:background="@color/primaryColor">
 
-
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
             android:layout_height="280dp"
             android:contentDescription="@string/github_banner"
             android:scaleType="centerCrop"
-            android:src="@drawable/github_banner"
+            android:src="@drawable/github_banner_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +28,7 @@
             android:id="@+id/img_detail_user"
             android:layout_width="220dp"
             android:layout_height="220dp"
-            app:civ_border_color="@color/primaryTextColor"
+            app:civ_border_color="@color/secondaryColor"
             app:civ_border_width="3dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="@+id/imageView2"

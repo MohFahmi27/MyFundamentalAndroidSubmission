@@ -10,7 +10,8 @@ import com.mfahmi.myfundamentalandroid.databinding.ActivityDetailBinding
 import com.mfahmi.myfundamentalandroid.model.User
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailBinding
+    private var _binding: ActivityDetailBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         const val EXTRA_DETAIL = "extra_detail"
@@ -18,7 +19,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        _binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -47,6 +48,11 @@ class DetailActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
