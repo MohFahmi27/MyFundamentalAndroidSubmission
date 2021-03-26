@@ -1,11 +1,13 @@
 package com.mfahmi.myfundamentalandroid.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayoutMediator
 import com.mfahmi.myfundamentalandroid.R
+import com.mfahmi.myfundamentalandroid.adapter.DetailSectionsPagerAdapter
 import com.mfahmi.myfundamentalandroid.databinding.ActivityDetailBinding
 import com.mfahmi.myfundamentalandroid.model.User
 
@@ -25,14 +27,16 @@ class DetailActivity : AppCompatActivity() {
 
         val userDetail = intent.getParcelableExtra<User>(EXTRA_DETAIL)
         with(binding) {
-            title = userDetail?.name
-            tvUsernameDetail.text = getString(R.string.username_placeholder, userDetail?.username)
-            tvNameDetail.text = userDetail?.name
-            Glide.with(this@DetailActivity).load(userDetail?.profilePict).into(imgDetailUser)
-            locationInclude.tvLocationDetail.text = userDetail?.location
-            userInfoInclude.tvRepositoryDetail.text = userDetail?.repository.toString()
-            userInfoInclude.tvFollowingDetail.text = userDetail?.following.toString()
-            userInfoInclude.tvFollowersDetail.text = userDetail?.followers.toString()
+            val tabTitle = resources.getStringArray(R.array.tab_title)
+            viewPagerDetail.adapter = DetailSectionsPagerAdapter(this@DetailActivity, tabTitle)
+            TabLayoutMediator(tabLayoutDetail, viewPagerDetail) { tab, position ->
+                tab.text = tabTitle[position]
+            }.attach()
+
+            tvToolbarName.text = userDetail?.username
+            tvUsernameDetail.text = userDetail?.name
+            tvNameDetail.text = userDetail?.username
+            Glide.with(this@DetailActivity).load(userDetail?.avatarUrl).into(imgDetailUser)
         }
     }
 
@@ -41,7 +45,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 return true

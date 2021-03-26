@@ -70,11 +70,11 @@
                     android:id="@+id/tv_username_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/tv_name_detail"
                     app:layout_constraintStart_toStartOf="@+id/tv_name_detail"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name_detail"
@@ -94,12 +94,24 @@
                     layout="@layout/location_layout_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginTop="6dp"
-                    app:layout_constraintStart_toStartOf="@id/tv_name_detail"
+                    android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                     app:layout_constraintEnd_toEndOf="@+id/tv_name_detail"
+                    app:layout_constraintStart_toStartOf="@id/tv_name_detail"
                     app:layout_constraintTop_toBottomOf="@+id/tv_username_detail" />
+
+                <include
+                    android:id="@+id/user_info_include"
+                    layout="@layout/info_user_include"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/include" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,22 +144,6 @@
                     tools:text="Mohammad Fahmi" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <include
-            android:id="@+id/user_info_include"
-            layout="@layout/info_user_include"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="16dp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout_detail"
@@ -159,11 +155,19 @@
             app:tabSelectedTextColor="@color/secondaryColor"
             app:tabTextColor="@color/primaryTextColor" />
 
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

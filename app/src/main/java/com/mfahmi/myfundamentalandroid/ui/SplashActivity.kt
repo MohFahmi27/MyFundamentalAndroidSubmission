@@ -1,9 +1,9 @@
 package com.mfahmi.myfundamentalandroid.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import com.mfahmi.myfundamentalandroid.R
 
 class SplashActivity : AppCompatActivity() {

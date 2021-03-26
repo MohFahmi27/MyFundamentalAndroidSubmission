@@ -1,19 +1,22 @@
 package com.mfahmi.myfundamentalandroid.ui
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.adapter.GithubUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.ActivityMainBinding
-import com.mfahmi.myfundamentalandroid.model.User
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,49 +25,52 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        loadingBarVisibility(true)
+        mainViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(MainViewModel::class.java)
+
         with(binding) {
             rvMain.layoutManager = LinearLayoutManager(this@MainActivity)
-            rvMain.adapter = GithubUserAdapter(getArrayListUser())
-            loadingBarVisibility(false)
+            val adapter = GithubUserAdapter()
+            rvMain.adapter = adapter
+
+            mainViewModel.getUserSearch().observe(this@MainActivity) {
+                it?.let {
+                    adapter.setArrayListUser(it)
+                    loadingBarVisibility(false)
+                }
+            }
         }
     }
 
-    private fun loadingBarVisibility(state: Boolean) =
-            if (state) binding.mainProgressBar.visibility = View.VISIBLE
-            else binding.mainProgressBar.visibility = View.GONE
-
-    private fun getArrayListUser(): Sequence<User> {
-        val getUsernameUser = resources.getStringArray(R.array.username)
-        val getNameUser = resources.getStringArray(R.array.name)
-        val getLocationUser = resources.getStringArray(R.array.location)
-        val getRepositoryUser = resources.getIntArray(R.array.repository)
-        val getCompanyUser = resources.getStringArray(R.array.company)
-        val getFollowers = resources.getIntArray(R.array.followers)
-        val getFollowing = resources.getIntArray(R.array.following)
-        val getProfilePict = resources.obtainTypedArray(R.array.profile_pict)
-
-        val arrayListUser: ArrayList<User> = arrayListOf()
-        for (position in getUsernameUser.indices) {
-            arrayListUser.add(
-                    User(
-                            getUsernameUser[position],
-                            getNameUser[position],
-                            getLocationUser[position],
-                            getRepositoryUser[position],
-                            getCompanyUser[position],
-                            getFollowers[position],
-                            getFollowing[position],
-                            getProfilePict.getResourceId(position, -1)
-                    )
-            )
-        }
-        getProfilePict.recycle()
-        return arrayListUser.asSequence()
-    }
+    private fun loadingBarVisibility(progressBarState: Boolean) =
+        if (progressBarState) binding.mainProgressBar.visibility = View.VISIBLE
+        else binding.mainProgressBar.visibility = View.GONE
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu?.findItem(R.id.search_bar_main)?.actionView as SearchView
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.queryHint = resources.getString(R.string.search_hint)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    loadingBarVisibility(true)
+                    mainViewModel.setUserSearch(it)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
+
         return true
     }
 

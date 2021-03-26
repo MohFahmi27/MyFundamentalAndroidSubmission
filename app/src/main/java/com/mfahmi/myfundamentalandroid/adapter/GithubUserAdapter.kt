@@ -6,12 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.mfahmi.myfundamentalandroid.ui.DetailActivity
 import com.mfahmi.myfundamentalandroid.databinding.ItemUserLayoutBinding
 import com.mfahmi.myfundamentalandroid.model.User
+import com.mfahmi.myfundamentalandroid.ui.DetailActivity
 
-class GithubUserAdapter(private val arrayListUser: Sequence<User>) :
+class GithubUserAdapter :
     RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
+    private val arrayListUser = ArrayList<User>()
+
+    fun setArrayListUser(value: ArrayList<User>) {
+        arrayListUser.clear()
+        arrayListUser.addAll(value)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
         val binding =
             ItemUserLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,19 +27,19 @@ class GithubUserAdapter(private val arrayListUser: Sequence<User>) :
     }
 
     override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
-        holder.bindView(arrayListUser.elementAt(position))
+        holder.bindView(arrayListUser[position])
     }
 
-    override fun getItemCount(): Int = arrayListUser.count()
+    override fun getItemCount(): Int = arrayListUser.size
 
     inner class GithubUserViewHolder(private val binding: ItemUserLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(user: User) {
             with(binding) {
-                Glide.with(itemView.context).load(user.profilePict)
+                Glide.with(itemView.context).load(user.avatarUrl)
                     .apply(RequestOptions().override(80, 80)).into(imgUser)
-                tvNama.text = user.name
-                tvUsername.text = user.username
+                tvNama.text = user.username
+                tvUsername.text = user.name
             }
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailActivity::class.java)
