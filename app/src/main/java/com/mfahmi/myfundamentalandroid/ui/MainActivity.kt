@@ -1,8 +1,12 @@
-package com.mfahmi.myfundamentalandroid
+package com.mfahmi.myfundamentalandroid.ui
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.adapter.GithubUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.ActivityMainBinding
 import com.mfahmi.myfundamentalandroid.model.User
@@ -15,14 +19,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarMain)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        loadingBarVisibility(true)
         with(binding) {
             rvMain.layoutManager = LinearLayoutManager(this@MainActivity)
             rvMain.adapter = GithubUserAdapter(getArrayListUser())
+            loadingBarVisibility(false)
         }
     }
 
-    private fun getArrayListUser(): ArrayList<User> {
+    private fun loadingBarVisibility(state: Boolean) =
+            if (state) binding.mainProgressBar.visibility = View.VISIBLE
+            else binding.mainProgressBar.visibility = View.GONE
+
+    private fun getArrayListUser(): Sequence<User> {
         val getUsernameUser = resources.getStringArray(R.array.username)
         val getNameUser = resources.getStringArray(R.array.name)
         val getLocationUser = resources.getStringArray(R.array.location)
@@ -48,7 +60,12 @@ class MainActivity : AppCompatActivity() {
             )
         }
         getProfilePict.recycle()
-        return arrayListUser
+        return arrayListUser.asSequence()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 
     override fun onDestroy() {

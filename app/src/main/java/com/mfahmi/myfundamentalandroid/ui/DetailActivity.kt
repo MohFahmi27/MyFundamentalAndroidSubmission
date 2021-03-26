@@ -1,11 +1,11 @@
-package com.mfahmi.myfundamentalandroid
+package com.mfahmi.myfundamentalandroid.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.databinding.ActivityDetailBinding
 import com.mfahmi.myfundamentalandroid.model.User
 

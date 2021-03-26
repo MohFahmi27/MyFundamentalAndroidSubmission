@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.mfahmi.myfundamentalandroid.DetailActivity
+import com.mfahmi.myfundamentalandroid.ui.DetailActivity
 import com.mfahmi.myfundamentalandroid.databinding.ItemUserLayoutBinding
 import com.mfahmi.myfundamentalandroid.model.User
 
-class GithubUserAdapter(private val arrayListUser: ArrayList<User>) :
+class GithubUserAdapter(private val arrayListUser: Sequence<User>) :
     RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
         val binding =
@@ -19,10 +19,10 @@ class GithubUserAdapter(private val arrayListUser: ArrayList<User>) :
     }
 
     override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
-        holder.bindView(arrayListUser[position])
+        holder.bindView(arrayListUser.elementAt(position))
     }
 
-    override fun getItemCount(): Int = arrayListUser.size
+    override fun getItemCount(): Int = arrayListUser.count()
 
     inner class GithubUserViewHolder(private val binding: ItemUserLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {

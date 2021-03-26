@@ -6,6 +6,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:background="@color/primaryColor">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="10dp"
+        android:layout_height="75dp"
+        android:src="@drawable/shape_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/tv_repository_detail"
         style="@style/DefaultTextView"
@@ -13,6 +25,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_followers_detail"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="50" />
 
@@ -36,6 +49,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_repository_detail"
         app:layout_constraintStart_toEndOf="@+id/tv_repository_detail"
         app:layout_constraintTop_toTopOf="@+id/tv_repository_detail"
+        app:layout_constraintEnd_toStartOf="@+id/tv_following_detail"
         tools:text="50" />
 
     <TextView
