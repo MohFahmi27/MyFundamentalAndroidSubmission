@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryColor"
-    tools:context=".ui.DetailActivity">
+    tools:context=".ui.activities.DetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -146,7 +146,6 @@
             android:id="@+id/tab_layout_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:background="@color/primaryColor"
             app:tabIndicatorColor="@color/secondaryColor"
             app:tabSelectedTextColor="@color/secondaryColor"

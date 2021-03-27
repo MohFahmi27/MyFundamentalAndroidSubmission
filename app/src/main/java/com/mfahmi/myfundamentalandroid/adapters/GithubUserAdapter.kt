@@ -1,4 +1,4 @@
-package com.mfahmi.myfundamentalandroid.adapter
+package com.mfahmi.myfundamentalandroid.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mfahmi.myfundamentalandroid.databinding.ItemUserLayoutBinding
 import com.mfahmi.myfundamentalandroid.model.User
-import com.mfahmi.myfundamentalandroid.ui.DetailActivity
+import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
 
 class GithubUserAdapter :
     RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
@@ -39,7 +39,7 @@ class GithubUserAdapter :
                 Glide.with(itemView.context).load(user.avatarUrl)
                     .apply(RequestOptions().override(80, 80)).into(imgUser)
                 tvNama.text = user.username
-                tvUsername.text = user.name
+                tvUsername.text = user.userType
             }
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailActivity::class.java)

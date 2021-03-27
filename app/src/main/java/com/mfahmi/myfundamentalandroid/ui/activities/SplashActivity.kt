@@ -1,4 +1,4 @@
-package com.mfahmi.myfundamentalandroid.ui
+package com.mfahmi.myfundamentalandroid.ui.activities
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,27 +1,24 @@
-package com.mfahmi.myfundamentalandroid.ui
+package com.mfahmi.myfundamentalandroid.ui.viewmodels
 
-import android.util.Log
+import android.app.Application
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
-import com.mfahmi.myfundamentalandroid.BuildConfig
+import com.mfahmi.myfundamentalandroid.api.ApiToken
 import com.mfahmi.myfundamentalandroid.model.User
 import cz.msebera.android.httpclient.Header
-import org.json.JSONObject
+import org.json.JSONArray
 
-class MainViewModel : ViewModel() {
-    companion object {
-        private const val TOKEN_GITHUB_KEY = BuildConfig.TOKEN_GITHUB_KEY
-    }
+class FollowingViewModel(application: Application) : AndroidViewModel(application) {
+    val listUserGithubFollowing = MutableLiveData<ArrayList<User>>()
 
-    val listUserGithubMain = MutableLiveData<ArrayList<User>>()
-
-    internal fun setUserSearch(userLogin: String) {
+    internal fun setUserFollowing(userLogin: String) {
         AsyncHttpClient().apply { addHeader("User-Agent", "request") }
-            .apply { addHeader("Authorization", TOKEN_GITHUB_KEY) }
-            .get(" https://api.github.com/search/users?q=$userLogin", object :
+            .apply { addHeader("Authorization", ApiToken.TOKEN_GITHUB_KEY) }
+            .get(" https://api.github.com/users/$userLogin/following", object :
                 AsyncHttpResponseHandler() {
                 override fun onSuccess(
                     statusCode: Int,
@@ -30,10 +27,9 @@ class MainViewModel : ViewModel() {
                 ) {
                     try {
                         val listUser = ArrayList<User>()
-                        JSONObject(String(responseBody!!)).run {
-                            val githubUser = this.getJSONArray("items")
-                            for (i in 0 until githubUser.length()) {
-                                githubUser.getJSONObject(i).run {
+                        JSONArray(String(responseBody!!)).run {
+                            for (i in 0 until this.length()) {
+                                this.getJSONObject(i).run {
                                     listUser.add(
                                         User(
                                             this.getString("login"),
@@ -44,9 +40,13 @@ class MainViewModel : ViewModel() {
                                 }
                             }
                         }
-                        listUserGithubMain.postValue(listUser)
+                        listUserGithubFollowing.postValue(listUser)
                     } catch (e: Exception) {
-                        Log.d("onSuccess: ", e.printStackTrace().toString())
+                        Toast.makeText(
+                            getApplication(),
+                            e.printStackTrace().toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
 
@@ -56,11 +56,14 @@ class MainViewModel : ViewModel() {
                     responseBody: ByteArray?,
                     error: Throwable?
                 ) {
-                    Log.d("onFailure: ", error?.message.toString())
+                    Toast.makeText(
+                        getApplication(),
+                        error?.message.toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
-
             })
     }
 
-    internal fun getUserSearch(): LiveData<ArrayList<User>> = listUserGithubMain
+    internal fun getUserFollowing(): LiveData<ArrayList<User>> = listUserGithubFollowing
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Aplikasi</string>
+    <string name="repositories">"repositori "</string>
+    <string name="followers">"pengikut "</string>
+    <string name="following">mengikuti</string>
+    <string name="search">Mencari</string>
+    <string name="search_hint">Cari User</string>
+    <string name="translate">Terjemahkan</string>
+    <string name="github_icon">github logo</string>
+    <string name="location_not_found">Lokasi Tidak Ada</string>
+    <string name="followers_title">Pengikut</string>
+    <string name="following_title">Mengikuti</string>
+</resources>

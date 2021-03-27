@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryColor"
-    tools:context=".ui.DetailActivity">
+    tools:context=".ui.activities.DetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -104,14 +104,13 @@
                 <include
                     android:id="@+id/user_info_include"
                     layout="@layout/info_user_include"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/include"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/include" />
+                    app:layout_constraintTop_toBottomOf="@+id/include" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -149,7 +148,6 @@
             android:id="@+id/tab_layout_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:background="@color/primaryColor"
             app:tabIndicatorColor="@color/secondaryColor"
             app:tabSelectedTextColor="@color/secondaryColor"

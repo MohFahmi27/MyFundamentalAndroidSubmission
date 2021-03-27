@@ -1,17 +1,21 @@
-package com.mfahmi.myfundamentalandroid.ui
+package com.mfahmi.myfundamentalandroid.ui.activities
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mfahmi.myfundamentalandroid.R
-import com.mfahmi.myfundamentalandroid.adapter.GithubUserAdapter
+import com.mfahmi.myfundamentalandroid.adapters.GithubUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.ActivityMainBinding
+import com.mfahmi.myfundamentalandroid.ui.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -27,9 +31,13 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            ViewModelProvider.AndroidViewModelFactory(application)
         ).get(MainViewModel::class.java)
 
+        getDataUser()
+    }
+
+    private fun getDataUser() {
         with(binding) {
             rvMain.layoutManager = LinearLayoutManager(this@MainActivity)
             val adapter = GithubUserAdapter()
@@ -72,6 +80,13 @@ class MainActivity : AppCompatActivity() {
         })
 
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.localization_menu -> {startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))}
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
