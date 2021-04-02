@@ -11,4 +11,8 @@
     <string name="location_not_found">Lokasi Tidak Ada</string>
     <string name="followers_title">Pengikut</string>
     <string name="following_title">Mengikuti</string>
+    <string name="favorite">Favorit</string>
+    <string name="image_placeholder">Gambar Placeholder</string>
+    <string name="search_placeholder_text">Menunggu Pencarian!</string>
+    <string name="no_result_text">User Tidak Dapat Ditemukan</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.mfahmi.myfundamentalandroid.ui.activities
 
+import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -8,12 +9,13 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mfahmi.myfundamentalandroid.R
-import com.mfahmi.myfundamentalandroid.adapters.GithubUserAdapter
+import com.mfahmi.myfundamentalandroid.adapters.MainUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.ActivityMainBinding
 import com.mfahmi.myfundamentalandroid.ui.viewmodels.MainViewModel
 
@@ -40,13 +42,19 @@ class MainActivity : AppCompatActivity() {
     private fun getDataUser() {
         with(binding) {
             rvMain.layoutManager = LinearLayoutManager(this@MainActivity)
-            val adapter = GithubUserAdapter()
+            val adapter = MainUserAdapter()
             rvMain.adapter = adapter
 
             mainViewModel.getUserSearch().observe(this@MainActivity) {
                 it?.let {
-                    adapter.setArrayListUser(it)
-                    loadingBarVisibility(false)
+                    if (it.size == 0) {
+                        placeholderVisibility(true)
+                        placeholderText.text = getString(R.string.no_result_text)
+                        loadingBarVisibility(false)
+                    } else {
+                        adapter.arrayListUser = it
+                        loadingBarVisibility(false)
+                    }
                 }
             }
         }
@@ -55,6 +63,16 @@ class MainActivity : AppCompatActivity() {
     private fun loadingBarVisibility(progressBarState: Boolean) =
         if (progressBarState) binding.mainProgressBar.visibility = View.VISIBLE
         else binding.mainProgressBar.visibility = View.GONE
+
+    private fun placeholderVisibility(layoutState: Boolean) {
+        if (layoutState) {
+            binding.placeholderImg.visibility = View.VISIBLE
+            binding.placeholderText.visibility = View.VISIBLE
+        } else {
+            binding.placeholderImg.visibility = View.GONE
+            binding.placeholderText.visibility = View.GONE
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -69,7 +87,11 @@ class MainActivity : AppCompatActivity() {
                 query?.let {
                     loadingBarVisibility(true)
                     mainViewModel.setUserSearch(it)
+                    placeholderVisibility(false)
                 }
+                val inputMethodManager =
+                    getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(window.currentFocus?.windowToken, 0)
                 return true
             }
 
@@ -83,8 +105,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.localization_menu -> {startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))}
+        when (item.itemId) {
+            R.id.settings_menu -> startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            R.id.favorite_menu -> true
         }
         return super.onOptionsItemSelected(item)
     }

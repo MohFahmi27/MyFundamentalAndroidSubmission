@@ -72,6 +72,7 @@
             tools:text="\@MohFhmi27" />
 
         <ImageView
+            android:id="@+id/img_item_arrow_right"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"

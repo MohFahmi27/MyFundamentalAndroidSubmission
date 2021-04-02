@@ -12,6 +12,11 @@
     <string name="location_not_found">Location Not Found</string>
     <string name="followers_title">Followers</string>
     <string name="following_title">Following</string>
+    <string name="favorite">Favorites</string>
+    <string name="image_placeholder">Image Placeholder</string>
+    <string name="search_placeholder_text">Waiting for Search!</string>
+    <string name="no_result_text">User Not Found!</string>
+    <string name="settings">Settings</string>
 
     <string-array name="tab_title">
         <item>@string/followers_title</item>

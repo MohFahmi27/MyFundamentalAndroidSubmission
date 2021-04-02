@@ -7,22 +7,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mfahmi.myfundamentalandroid.adapters.FollowersUserAdapter
+import com.mfahmi.myfundamentalandroid.adapters.DetailUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.FragmentFollowersBinding
 import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
-import com.mfahmi.myfundamentalandroid.ui.viewmodels.FollowersViewModel
+import com.mfahmi.myfundamentalandroid.ui.viewmodels.DetailViewModel
+import com.mfahmi.myfundamentalandroid.ui.viewmodels.FragmentsViewModel
 
 class FollowersFragment : Fragment() {
     private var _binding: FragmentFollowersBinding? = null
     private val binding get() = _binding!!
-    private lateinit var followersViewModel: FollowersViewModel
+    private lateinit var fragmentsViewModel: DetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        followersViewModel = ViewModelProvider(
+        fragmentsViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(activity!!.application)
-        ).get(FollowersViewModel::class.java)
+        ).get(DetailViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -38,23 +39,42 @@ class FollowersFragment : Fragment() {
 
         arguments?.let {
             loadingBarVisibility(true)
-            followersViewModel.setUserFollowers(arguments!!.getString(DetailActivity.EXTRA_FRAGMENT).toString())
+            fragmentsViewModel.setUsersLists(
+                arguments!!.getString(DetailActivity.EXTRA_FRAGMENT).toString(),
+                FragmentsViewModel.FOLLOWERS
+            )
         }
 
         recyclerViewAddData()
 
     }
 
+    private fun placeholderVisibility(layoutState: Boolean) {
+        if (layoutState) {
+            binding.placeholderImg.visibility = View.VISIBLE
+            binding.placeholderText.visibility = View.VISIBLE
+        } else {
+            binding.placeholderImg.visibility = View.GONE
+            binding.placeholderText.visibility = View.GONE
+        }
+    }
+
     private fun recyclerViewAddData() {
         with(binding) {
             rvFollowersUser.layoutManager = LinearLayoutManager(context)
-            val adapter = FollowersUserAdapter()
+            val adapter = DetailUserAdapter()
             rvFollowersUser.adapter = adapter
 
-            followersViewModel.getUserFollowers().observe(viewLifecycleOwner) {
+            fragmentsViewModel.getUsersGithub().observe(viewLifecycleOwner) {
                 it?.let {
-                    adapter.setFollowersUsers(it)
-                    loadingBarVisibility(false)
+                    if (it.size == 0) {
+                        placeholderVisibility(true)
+                        loadingBarVisibility(false)
+                    } else {
+                        adapter.usersDetailLists = it
+                        placeholderVisibility(false)
+                        loadingBarVisibility(false)
+                    }
                 }
             }
         }

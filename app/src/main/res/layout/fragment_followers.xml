@@ -14,8 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_user_layout"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progress_bar_followers"
@@ -27,5 +26,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/placeholder_img"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:contentDescription="@string/image_placeholder"
+        android:src="@drawable/ic_search_place_holder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/placeholder_text"
+        style="@style/DefaultTextView"
+        android:textAlignment="center"
+        android:text="@string/no_result_text"
+        android:layout_marginTop="@dimen/dimen_value_super_small"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/placeholder_img"
+        app:layout_constraintStart_toStartOf="@+id/placeholder_img"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder_img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,15 +10,14 @@ import com.mfahmi.myfundamentalandroid.databinding.ItemUserLayoutBinding
 import com.mfahmi.myfundamentalandroid.model.User
 import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
 
-class GithubUserAdapter :
-    RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
-    private val arrayListUser = ArrayList<User>()
-
-    fun setArrayListUser(value: ArrayList<User>) {
-        arrayListUser.clear()
-        arrayListUser.addAll(value)
-        notifyDataSetChanged()
-    }
+class MainUserAdapter :
+    RecyclerView.Adapter<MainUserAdapter.GithubUserViewHolder>() {
+    var arrayListUser = ArrayList<User>()
+        set(value) {
+            field.clear()
+            field.addAll(value)
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
         val binding =

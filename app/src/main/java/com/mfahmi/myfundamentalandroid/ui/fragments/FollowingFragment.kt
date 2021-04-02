@@ -1,25 +1,30 @@
 package com.mfahmi.myfundamentalandroid.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mfahmi.myfundamentalandroid.adapters.FollowingUserAdapter
+import com.mfahmi.myfundamentalandroid.adapters.DetailUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.FragmentFollowingBinding
 import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
-import com.mfahmi.myfundamentalandroid.ui.viewmodels.FollowingViewModel
+import com.mfahmi.myfundamentalandroid.ui.viewmodels.DetailViewModel
+import com.mfahmi.myfundamentalandroid.ui.viewmodels.FragmentsViewModel
 
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
-    private lateinit var followingViewModel: FollowingViewModel
+    private lateinit var followingViewModel: DetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        followingViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(activity!!.application)).get(FollowingViewModel::class.java)
+        followingViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory(activity!!.application)
+        ).get(DetailViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -35,22 +40,41 @@ class FollowingFragment : Fragment() {
 
         arguments?.let {
             loadingBarVisibility(true)
-            followingViewModel.setUserFollowing(arguments!!.getString(DetailActivity.EXTRA_FRAGMENT).toString())
+            followingViewModel.setUsersLists(
+                arguments!!.getString(DetailActivity.EXTRA_FRAGMENT).toString(),
+                FragmentsViewModel.FOLLOWING
+            )
         }
 
         recyclerViewAddData()
     }
 
+    private fun placeholderVisibility(layoutState: Boolean) {
+        if (layoutState) {
+            binding.placeholderImg.visibility = View.VISIBLE
+            binding.placeholderText.visibility = View.VISIBLE
+        } else {
+            binding.placeholderImg.visibility = View.GONE
+            binding.placeholderText.visibility = View.GONE
+        }
+    }
+
     private fun recyclerViewAddData() {
         with(binding) {
-            rvFollowersUser.layoutManager = LinearLayoutManager(context)
-            val adapter = FollowingUserAdapter()
-            rvFollowersUser.adapter = adapter
+            rvFollowingUser.layoutManager = LinearLayoutManager(context)
+            val adapter = DetailUserAdapter()
+            rvFollowingUser.adapter = adapter
 
-            followingViewModel.getUserFollowing().observe(viewLifecycleOwner) {
+            followingViewModel.getUsersGithub().observe(viewLifecycleOwner) {
                 it?.let {
-                    adapter.setFollowingUsers(it)
-                    loadingBarVisibility(false)
+                    if (it.size == 0) {
+                        placeholderVisibility(true)
+                        loadingBarVisibility(false)
+                    } else {
+                        adapter.usersDetailLists = it
+                        placeholderVisibility(false)
+                        loadingBarVisibility(false)
+                    }
                 }
             }
         }

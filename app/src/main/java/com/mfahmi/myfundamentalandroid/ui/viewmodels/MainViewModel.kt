@@ -58,9 +58,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     responseBody: ByteArray?,
                     error: Throwable?
                 ) {
+                    val errorMessage = when (statusCode) {
+                        401 -> "$statusCode : Bad Request"
+                        403 -> "$statusCode : Forbidden"
+                        404 -> "$statusCode : Not Found"
+                        else -> "$statusCode : ${error?.message}"
+                    }
                     Toast.makeText(
                         getApplication(),
-                        error?.message.toString(),
+                        errorMessage,
                         Toast.LENGTH_LONG
                     ).show()
                 }

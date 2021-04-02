@@ -12,13 +12,18 @@ import com.mfahmi.myfundamentalandroid.model.User
 import cz.msebera.android.httpclient.Header
 import org.json.JSONArray
 
-class FollowingViewModel(application: Application) : AndroidViewModel(application) {
-    val listUserGithubFollowing = MutableLiveData<ArrayList<User>>()
+class FragmentsViewModel(application: Application) : AndroidViewModel(application) {
+    companion object {
+        const val FOLLOWERS = "followers"
+        const val FOLLOWING = "following"
+    }
 
-    internal fun setUserFollowing(userLogin: String) {
+    val listUsersGithub = MutableLiveData<ArrayList<User>>()
+
+    internal fun setUsersLists(userLogin: String, requestType: String) {
         AsyncHttpClient().apply { addHeader("User-Agent", "request") }
             .apply { addHeader("Authorization", ApiToken.TOKEN_GITHUB_KEY) }
-            .get(" https://api.github.com/users/$userLogin/following", object :
+            .get(" https://api.github.com/users/$userLogin/$requestType", object :
                 AsyncHttpResponseHandler() {
                 override fun onSuccess(
                     statusCode: Int,
@@ -27,7 +32,7 @@ class FollowingViewModel(application: Application) : AndroidViewModel(applicatio
                 ) {
                     try {
                         val listUser = ArrayList<User>()
-                        JSONArray(String(responseBody!!)).run {
+                            JSONArray(String(responseBody!!)).run {
                             for (i in 0 until this.length()) {
                                 this.getJSONObject(i).run {
                                     listUser.add(
@@ -40,7 +45,7 @@ class FollowingViewModel(application: Application) : AndroidViewModel(applicatio
                                 }
                             }
                         }
-                        listUserGithubFollowing.postValue(listUser)
+                        listUsersGithub.postValue(listUser)
                     } catch (e: Exception) {
                         Toast.makeText(
                             getApplication(),
@@ -56,14 +61,20 @@ class FollowingViewModel(application: Application) : AndroidViewModel(applicatio
                     responseBody: ByteArray?,
                     error: Throwable?
                 ) {
+                    val errorMessage = when (statusCode) {
+                        401 -> "$statusCode : Bad Request"
+                        403 -> "$statusCode : Forbidden"
+                        404 -> "$statusCode : Not Found"
+                        else -> "$statusCode : ${error?.message}"
+                    }
                     Toast.makeText(
                         getApplication(),
-                        error?.message.toString(),
+                        errorMessage,
                         Toast.LENGTH_LONG
                     ).show()
                 }
             })
     }
 
-    internal fun getUserFollowing(): LiveData<ArrayList<User>> = listUserGithubFollowing
+    internal fun getUsersGithub(): LiveData<ArrayList<User>> = listUsersGithub
 }

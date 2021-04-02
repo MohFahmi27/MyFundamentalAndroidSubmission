@@ -11,9 +11,14 @@
 
     <group android:menuCategory="container">
         <item
-            android:id="@+id/localization_menu"
-            android:icon="@drawable/ic_baseline_g_translate_24"
-            android:title="@string/translate"
+            android:id="@+id/favorite_menu"
+            android:icon="@drawable/ic_heart_full"
+            android:title="@string/favorite"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/settings_menu"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/settings"
             app:showAsAction="ifRoom" />
     </group>
 
