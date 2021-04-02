@@ -15,7 +15,12 @@ This is submission for android fundamental course in <a href="https://www.dicodi
 </p>
 
 ## Submission 2 Screenshot:
-> COMING SOON
+<p align="center">
+  <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/Screenshot_1616924469.png" alt="Main Activity" width="200"/>
+  <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/Screenshot_1616924494.png" alt="Detail Activity" width="200"/>
+  <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/Screenshot_1616924535.png" alt="Detail Activity" width="200"/>
+  <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/Screenshot_1616924543.png" alt="Detail Activity" width="200"/>
+</p>
 
 ## Submission 3 Screenshot:
 > COMING SOON
