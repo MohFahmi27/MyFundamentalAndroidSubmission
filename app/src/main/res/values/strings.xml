@@ -16,6 +16,10 @@
     <string name="search_placeholder_text">Waiting for Search!</string>
     <string name="no_result_text">User Not Found!</string>
     <string name="settings">Settings</string>
+    <string name="notification" translatable="false">notification</string>
+    <string name="language" translatable="false">language</string>
+    <string name="change_language">Change Language</string>
+    <string name="preference_summary" translatable="false">English</string>
 
     <string-array name="tab_title">
         <item>@string/followers_title</item>

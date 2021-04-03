@@ -5,7 +5,6 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -107,7 +106,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.settings_menu -> startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            R.id.settings_menu -> startActivity(Intent(this, PreferenceActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

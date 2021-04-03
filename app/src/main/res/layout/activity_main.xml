@@ -38,16 +38,16 @@
                 app:popupTheme="@style/Theme.AppCompat.Light">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/dimen_value_small"
                     android:contentDescription="@string/github_icon"
                     android:src="@drawable/ic_github" />
 
                 <TextView
                     style="@style/DefaultTextView"
                     android:text="@string/github_com"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -63,7 +63,7 @@
             android:id="@+id/rv_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/dimen_value_super_small"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

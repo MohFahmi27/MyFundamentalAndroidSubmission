@@ -15,4 +15,5 @@
     <string name="search_placeholder_text">Menunggu Pencarian!</string>
     <string name="no_result_text">User Tidak Dapat Ditemukan</string>
     <string name="settings">Pengaturan</string>
+    <string name="change_language">Ganti Bahasa</string>
 </resources>

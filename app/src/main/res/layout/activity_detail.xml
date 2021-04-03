@@ -56,7 +56,7 @@
                 <TextView
                     android:id="@+id/tv_name_detail"
                     style="@style/DefaultTextView"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/dimen_value_small"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/img_detail_user"
@@ -68,7 +68,7 @@
                     android:id="@+id/tv_username_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/dimen_value_super_small"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="15sp"
@@ -92,7 +92,7 @@
                     layout="@layout/location_layout_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/dimen_value_standard"
                     app:layout_constraintBottom_toBottomOf="@+id/include"
                     app:layout_constraintEnd_toEndOf="@+id/include"
                     app:layout_constraintStart_toStartOf="@+id/include"
@@ -104,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/dimen_value_standard"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +129,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="@dimen/dimen_value_small"
                     android:contentDescription="@string/github_icon"
                     android:src="@drawable/ic_github" />
 
