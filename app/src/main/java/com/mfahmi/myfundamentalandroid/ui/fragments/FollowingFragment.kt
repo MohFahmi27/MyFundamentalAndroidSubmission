@@ -1,7 +1,6 @@
 package com.mfahmi.myfundamentalandroid.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.mfahmi.myfundamentalandroid.adapters.DetailUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.FragmentFollowingBinding
 import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
 import com.mfahmi.myfundamentalandroid.ui.viewmodels.DetailViewModel
-import com.mfahmi.myfundamentalandroid.ui.viewmodels.FragmentsViewModel
 
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
@@ -42,7 +40,7 @@ class FollowingFragment : Fragment() {
             loadingBarVisibility(true)
             followingViewModel.setUsersLists(
                 arguments!!.getString(DetailActivity.EXTRA_FRAGMENT).toString(),
-                FragmentsViewModel.FOLLOWING
+                DetailViewModel.FOLLOWING
             )
         }
 
@@ -83,9 +81,4 @@ class FollowingFragment : Fragment() {
     private fun loadingBarVisibility(progressBarState: Boolean) =
         if (progressBarState) binding.progressBarFollowers.visibility = View.VISIBLE
         else binding.progressBarFollowers.visibility = View.GONE
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }

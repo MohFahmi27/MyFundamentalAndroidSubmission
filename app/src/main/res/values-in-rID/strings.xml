@@ -6,7 +6,6 @@
     <string name="following">mengikuti</string>
     <string name="search">Mencari</string>
     <string name="search_hint">Cari User</string>
-    <string name="translate">Terjemahkan</string>
     <string name="github_icon">github logo</string>
     <string name="location_not_found">Lokasi Tidak Ada</string>
     <string name="followers_title">Pengikut</string>
@@ -15,4 +14,5 @@
     <string name="image_placeholder">Gambar Placeholder</string>
     <string name="search_placeholder_text">Menunggu Pencarian!</string>
     <string name="no_result_text">User Tidak Dapat Ditemukan</string>
+    <string name="settings">Pengaturan</string>
 </resources>

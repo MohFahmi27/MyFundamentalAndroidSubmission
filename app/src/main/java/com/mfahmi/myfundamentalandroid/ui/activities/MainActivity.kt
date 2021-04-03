@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private fun getDataUser() {
         with(binding) {
             rvMain.layoutManager = LinearLayoutManager(this@MainActivity)
-            val adapter = MainUserAdapter()
+            val adapter = MainUserAdapter(applicationContext)
             rvMain.adapter = adapter
 
             mainViewModel.getUserSearch().observe(this@MainActivity) {
@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                         placeholderText.text = getString(R.string.no_result_text)
                         loadingBarVisibility(false)
                     } else {
+                        placeholderVisibility(false)
                         adapter.arrayListUser = it
                         loadingBarVisibility(false)
                     }
@@ -107,7 +108,6 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.settings_menu -> startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-            R.id.favorite_menu -> true
         }
         return super.onOptionsItemSelected(item)
     }

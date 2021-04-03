@@ -6,7 +6,6 @@
     <string name="following">following</string>
     <string name="search">Search</string>
     <string name="search_hint">Search User</string>
-    <string name="translate">Translate</string>
     <string name="github_com" translatable="false">Github.com</string>
     <string name="github_icon">github icon</string>
     <string name="location_not_found">Location Not Found</string>

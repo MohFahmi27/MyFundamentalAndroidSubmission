@@ -1,16 +1,21 @@
 package com.mfahmi.myfundamentalandroid.adapters
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.databinding.ItemUserLayoutBinding
 import com.mfahmi.myfundamentalandroid.model.User
 import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
+import java.util.*
 
-class MainUserAdapter :
+class MainUserAdapter(private val context: Context) :
     RecyclerView.Adapter<MainUserAdapter.GithubUserViewHolder>() {
     var arrayListUser = ArrayList<User>()
         set(value) {
@@ -27,6 +32,12 @@ class MainUserAdapter :
 
     override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
         holder.bindView(arrayListUser[position])
+        setAnimation(holder.itemView)
+    }
+
+    private fun setAnimation(view: View) {
+        val animation = AnimationUtils.loadAnimation(context, R.anim.recyclerview_main_anim)
+        view.startAnimation(animation)
     }
 
     override fun getItemCount(): Int = arrayListUser.size

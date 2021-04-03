@@ -1,6 +1,7 @@
 package com.mfahmi.myfundamentalandroid.ui.viewmodels
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -21,9 +22,11 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     companion object {
         const val FOLLOWERS = "followers"
         const val FOLLOWING = "following"
+        private const val TAG = "DetailViewModel"
     }
 
     internal fun setUserDetailData(userLogin: String) {
+        Log.d(TAG, "setUserDetailData: ${ApiToken.TOKEN_GITHUB_KEY}")
         AsyncHttpClient().apply { addHeader("User-Agent", "request") }
             .apply { addHeader("Authorization", ApiToken.TOKEN_GITHUB_KEY) }
             .get(" https://api.github.com/users/$userLogin", object :
