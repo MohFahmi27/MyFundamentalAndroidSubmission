@@ -16,4 +16,9 @@
     <string name="no_result_text">User Tidak Dapat Ditemukan</string>
     <string name="settings">Pengaturan</string>
     <string name="change_language">Ganti Bahasa</string>
+    <string name="daily_reminder_preference_title">Pengingat Disetel pada 9:00 a.m.</string>
+    <string name="message_daily_reminder_on">Pengingat telah dinyalakan</string>
+    <string name="message_daily_reminder_off">Pengingat telah dimatikan</string>
+    <string name="content_text_notification">Cari User Favorite Baru</string>
+    <string name="content_title_notification">Pengingat Github</string>
 </resources>

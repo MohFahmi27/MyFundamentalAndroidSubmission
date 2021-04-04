@@ -19,7 +19,11 @@
     <string name="notification" translatable="false">notification</string>
     <string name="language" translatable="false">language</string>
     <string name="change_language">Change Language</string>
-    <string name="preference_summary" translatable="false">English</string>
+    <string name="daily_reminder_preference_title">Set Reminder at 9:00 a.m.</string>
+    <string name="message_daily_reminder_on">Reminder has been set on</string>
+    <string name="message_daily_reminder_off">Reminder has been set off</string>
+    <string name="content_text_notification">Find New Favorite User</string>
+    <string name="content_title_notification">Github Reminder</string>
 
     <string-array name="tab_title">
         <item>@string/followers_title</item>

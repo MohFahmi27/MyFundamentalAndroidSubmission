@@ -10,16 +10,15 @@ import com.mfahmi.myfundamentalandroid.api.ApiToken
 import com.mfahmi.myfundamentalandroid.model.User
 import com.shashank.sony.fancytoastlib.FancyToast
 import cz.msebera.android.httpclient.Header
-import org.json.JSONObject
+import org.json.JSONArray
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class FollowingViewModel(application: Application): AndroidViewModel(application) {
+    val listFollowingUsers = MutableLiveData<ArrayList<User>>()
 
-    val listUserGithubMain = MutableLiveData<ArrayList<User>>()
-
-    internal fun setUserSearch(userLogin: String) {
+    internal fun setFollowingList(userLogin: String) {
         AsyncHttpClient().apply { addHeader("User-Agent", "request") }
             .apply { addHeader("Authorization", ApiToken.TOKEN_GITHUB_KEY) }
-            .get(" https://api.github.com/search/users?q=$userLogin", object :
+            .get(" https://api.github.com/users/$userLogin/following", object :
                 AsyncHttpResponseHandler() {
                 override fun onSuccess(
                     statusCode: Int,
@@ -28,10 +27,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 ) {
                     try {
                         val listUser = ArrayList<User>()
-                        JSONObject(String(responseBody!!)).run {
-                            val githubUser = this.getJSONArray("items")
-                            for (i in 0 until githubUser.length()) {
-                                githubUser.getJSONObject(i).run {
+                        JSONArray(String(responseBody!!)).run {
+                            for (i in 0 until this.length()) {
+                                this.getJSONObject(i).run {
                                     listUser.add(
                                         User(
                                             this.getString("login"),
@@ -42,7 +40,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                                 }
                             }
                         }
-                        listUserGithubMain.postValue(listUser)
+                        listFollowingUsers.postValue(listUser)
                     } catch (e: Exception) {
                         FancyToast.makeText(
                             getApplication(),
@@ -73,5 +71,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             })
     }
 
-    internal fun getUserSearch(): LiveData<ArrayList<User>> = listUserGithubMain
+    internal fun getUserFollowing(): LiveData<ArrayList<User>> = listFollowingUsers
 }

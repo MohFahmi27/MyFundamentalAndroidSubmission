@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mfahmi.myfundamentalandroid.adapters.DetailUserAdapter
 import com.mfahmi.myfundamentalandroid.databinding.FragmentFollowingBinding
 import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
-import com.mfahmi.myfundamentalandroid.ui.viewmodels.DetailViewModel
+import com.mfahmi.myfundamentalandroid.ui.viewmodels.FollowingViewModel
 
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
-    private lateinit var followingViewModel: DetailViewModel
+    private lateinit var followingViewModel: FollowingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         followingViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.AndroidViewModelFactory(activity!!.application)
-        ).get(DetailViewModel::class.java)
+            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+        ).get(FollowingViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -38,9 +38,8 @@ class FollowingFragment : Fragment() {
 
         arguments?.let {
             loadingBarVisibility(true)
-            followingViewModel.setUsersLists(
-                arguments!!.getString(DetailActivity.EXTRA_FRAGMENT).toString(),
-                DetailViewModel.FOLLOWING
+            followingViewModel.setFollowingList(
+                requireArguments().getString(DetailActivity.EXTRA_FRAGMENT).toString()
             )
         }
 
@@ -63,7 +62,7 @@ class FollowingFragment : Fragment() {
             val adapter = DetailUserAdapter()
             rvFollowingUser.adapter = adapter
 
-            followingViewModel.getUsersGithub().observe(viewLifecycleOwner) {
+            followingViewModel.getUserFollowing().observe(viewLifecycleOwner) {
                 it?.let {
                     if (it.size == 0) {
                         placeholderVisibility(true)

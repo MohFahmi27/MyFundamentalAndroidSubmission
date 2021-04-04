@@ -5,12 +5,11 @@
         android:defaultValue="false"
         android:icon="@drawable/ic_notification"
         android:key="@string/notification"
-        android:title="Set Reminder at 9:00 a.m." />
+        android:title="@string/daily_reminder_preference_title" />
 
     <Preference
         android:icon="@drawable/ic_translation"
         android:key="@string/language"
-        android:summary="@string/preference_summary"
         android:title="@string/change_language" />
 
 </PreferenceScreen>
