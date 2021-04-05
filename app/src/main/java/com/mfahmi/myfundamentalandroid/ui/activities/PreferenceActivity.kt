@@ -26,9 +26,4 @@ class PreferenceActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         return super.onCreateOptionsMenu(menu)
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }

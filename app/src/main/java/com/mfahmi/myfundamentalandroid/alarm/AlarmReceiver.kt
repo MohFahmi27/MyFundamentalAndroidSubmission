@@ -42,15 +42,15 @@ class AlarmReceiver : BroadcastReceiver() {
         calendar.set(Calendar.SECOND, 0)
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_DAILY, intent, 0)
-        alarmManager.setInexactRepeating(
+        alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
-                AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+                AlarmManager.INTERVAL_DAY,
                 pendingIntent
         )
         FancyToast.makeText(
                 context,
-                "Daily On",
+                context.getString(R.string.message_daily_reminder_on),
                 FancyToast.LENGTH_LONG,
                 FancyToast.INFO,
                 false
@@ -66,7 +66,7 @@ class AlarmReceiver : BroadcastReceiver() {
         alarmManager.cancel(pendingIntent)
         FancyToast.makeText(
                 context,
-                "DAILY OFF",
+                context.getString(R.string.message_daily_reminder_off),
                 FancyToast.LENGTH_LONG,
                 FancyToast.INFO,
                 false
@@ -88,14 +88,14 @@ class AlarmReceiver : BroadcastReceiver() {
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_github)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(

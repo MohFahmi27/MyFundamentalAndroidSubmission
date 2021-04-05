@@ -21,4 +21,5 @@
     <string name="message_daily_reminder_off">Pengingat telah dimatikan</string>
     <string name="content_text_notification">Cari User Favorite Baru</string>
     <string name="content_title_notification">Pengingat Github</string>
+    <string name="add_to_favorite">Tambahkan ke Favorite</string>
 </resources>

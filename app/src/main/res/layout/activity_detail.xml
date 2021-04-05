@@ -156,15 +156,26 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:fillViewport="true"
+        android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/dimen_value_big"
+        android:contentDescription="@string/add_to_favorite"
+        android:src="@drawable/ic_heart_border"
+        android:backgroundTint="@color/primaryColor"
+        app:borderWidth="3dp"
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

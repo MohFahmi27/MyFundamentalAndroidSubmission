@@ -24,6 +24,7 @@
     <string name="message_daily_reminder_off">Reminder has been set off</string>
     <string name="content_text_notification">Find New Favorite User</string>
     <string name="content_title_notification">Github Reminder</string>
+    <string name="add_to_favorite">Add to Favorite</string>
 
     <string-array name="tab_title">
         <item>@string/followers_title</item>
