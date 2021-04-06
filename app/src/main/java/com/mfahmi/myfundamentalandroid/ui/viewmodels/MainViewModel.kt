@@ -47,7 +47,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         FancyToast.makeText(
                             getApplication(),
                             e.printStackTrace().toString(),
-                            FancyToast.LENGTH_LONG, FancyToast.ERROR, true
+                            FancyToast.LENGTH_LONG, FancyToast.ERROR, false
                         ).show()
                     }
                 }
@@ -67,7 +67,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     FancyToast.makeText(
                         getApplication(),
                         errorMessage,
-                        FancyToast.LENGTH_LONG, FancyToast.ERROR, true
+                        FancyToast.LENGTH_LONG, FancyToast.ERROR, false
                     ).show()
                 }
             })

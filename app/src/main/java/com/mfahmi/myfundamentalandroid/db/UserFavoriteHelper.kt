@@ -5,12 +5,13 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns._ID
+import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.TABLE_NAME
+import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.USERNAME
 import java.sql.SQLException
-import kotlin.jvm.Throws
 
 class UserFavoriteHelper(context: Context) {
     companion object {
-        private const val DATABASE_TABLE = DatabaseContract.TABLE_NAME
+        private const val DATABASE_TABLE = TABLE_NAME
         private lateinit var databaseHelper: DatabaseHelper
         private var INSTANCE: UserFavoriteHelper? = null
         fun getInstance(context: Context): UserFavoriteHelper =
@@ -46,20 +47,22 @@ class UserFavoriteHelper(context: Context) {
             "$_ID ASC"
         )
 
-    fun queryById(id: String): Cursor =
-        mySqlLiteDatabase.query(
-            DATABASE_TABLE,
-            null,
-            "$_ID = ?",
-            arrayOf(id),
-            null,
-            null,
-            null
+    fun checkUser(username: String): Boolean {
+        val cursor: Cursor = mySqlLiteDatabase.rawQuery(
+            "SELECT * FROM $TABLE_NAME WHERE $USERNAME = ?",
+            arrayOf(username)
         )
+        if (cursor.count > 0) {
+            cursor.close()
+            return true
+        }
+        cursor.close()
+        return false
+    }
 
     fun insert(values: ContentValues): Long =
         mySqlLiteDatabase.insert(DATABASE_TABLE, null, values)
 
-    fun delete(id: String): Int =
-        mySqlLiteDatabase.delete(DATABASE_TABLE, "_ID = $id", null)
+    fun delete(username: String): Int =
+        mySqlLiteDatabase.delete(DATABASE_TABLE, "$USERNAME = ?", arrayOf(username))
 }

@@ -25,6 +25,7 @@
     <string name="content_text_notification">Find New Favorite User</string>
     <string name="content_title_notification">Github Reminder</string>
     <string name="add_to_favorite">Add to Favorite</string>
+    <string name="remove_to_favorite">Remove to Favorite</string>
 
     <string-array name="tab_title">
         <item>@string/followers_title</item>

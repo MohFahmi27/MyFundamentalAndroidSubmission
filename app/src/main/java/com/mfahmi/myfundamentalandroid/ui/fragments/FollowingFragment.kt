@@ -80,4 +80,9 @@ class FollowingFragment : Fragment() {
     private fun loadingBarVisibility(progressBarState: Boolean) =
         if (progressBarState) binding.progressBarFollowers.visibility = View.VISIBLE
         else binding.progressBarFollowers.visibility = View.GONE
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

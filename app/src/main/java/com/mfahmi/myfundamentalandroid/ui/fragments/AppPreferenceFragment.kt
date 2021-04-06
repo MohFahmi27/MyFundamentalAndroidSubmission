@@ -1,29 +1,21 @@
 package com.mfahmi.myfundamentalandroid.ui.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreference
 import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.alarm.AlarmReceiver
-import com.shashank.sony.fancytoastlib.FancyToast
 import java.util.*
 
 class AppPreferenceFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var NOTIFICATION_KEY: String
     private lateinit var LANGUAGE_KEY: String
-
-    companion object {
-        private const val PREFERENCE_NAME = "github_setting_pref"
-        private const val TAG = "AppPreferenceFragment"
-    }
 
     private lateinit var dailyReminder: SwitchPreference
     private lateinit var languagePreference: Preference
@@ -34,7 +26,6 @@ class AppPreferenceFragment : PreferenceFragmentCompat(), SharedPreferences.OnSh
         init()
         alarmReceiver = AlarmReceiver()
         dailyReminder.isChecked = preferenceManager.sharedPreferences.getBoolean(NOTIFICATION_KEY, false)
-        Log.d(TAG, "onCreatePreferences: ${preferenceManager.sharedPreferences.getBoolean(NOTIFICATION_KEY, false)}")
         languagePreference.summary = Locale.getDefault().displayLanguage
     }
 
@@ -68,12 +59,12 @@ class AppPreferenceFragment : PreferenceFragmentCompat(), SharedPreferences.OnSh
             }
         }
         val dailyReminderState = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(NOTIFICATION_KEY, false)
-        Log.d(TAG, "onSharedPreferenceChanged: $dailyReminderState")
         if (dailyReminderState) {
             alarmReceiver.setDailyReminder(requireContext(),
                     getString(R.string.content_title_notification),
                     getString(R.string.content_text_notification))
-        } else {
+        }
+        if (!dailyReminderState) {
             alarmReceiver.cancelAlarm(requireContext())
         }
     }

@@ -1,27 +1,28 @@
 package com.mfahmi.myfundamentalandroid.ui.activities
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.contentValuesOf
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.adapters.DetailSectionsPagerAdapter
 import com.mfahmi.myfundamentalandroid.databinding.ActivityDetailBinding
-import com.mfahmi.myfundamentalandroid.db.DatabaseContract
+import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.AVATAR_URL
+import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.USERNAME
+import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.USER_TYPE
 import com.mfahmi.myfundamentalandroid.db.UserFavoriteHelper
 import com.mfahmi.myfundamentalandroid.model.User
 import com.mfahmi.myfundamentalandroid.ui.viewmodels.DetailViewModel
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class DetailActivity : AppCompatActivity() {
     private var _binding: ActivityDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var userFavoriteHelper: UserFavoriteHelper
+    private lateinit var userDetail: User
 
     companion object {
         const val EXTRA_DETAIL = "extra_detail"
@@ -34,25 +35,35 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.btnBackToolbar.setOnClickListener { finish() }
 
+        userFavoriteHelper = UserFavoriteHelper.getInstance(applicationContext)
+        userFavoriteHelper.open()
+
+
         detailViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(application)
         ).get(DetailViewModel::class.java)
 
-        setUserData()
+        initData()
         addDataToView()
+        binding.fabAddFavorite?.setOnClickListener { insertFavorite() }
     }
 
-    private fun setUserData() {
+    private fun initData() {
         val tabTitle = resources.getStringArray(R.array.tab_title)
-        val userDetail = intent.getParcelableExtra<User>(EXTRA_DETAIL)
+        userDetail = intent.getParcelableExtra<User>(EXTRA_DETAIL) as User
 
-        userDetail?.username?.let {
+        userDetail.username.let {
             val usernameLogin = Bundle()
             usernameLogin.putString(EXTRA_FRAGMENT, userDetail.username)
             detailViewModel.setUserDetailData(it)
             binding.viewPagerDetail.adapter =
                 DetailSectionsPagerAdapter(this@DetailActivity, tabTitle, usernameLogin)
+            if (userFavoriteHelper.checkUser(it)) {
+                setStateFab(true)
+            } else {
+                setStateFab(false)
+            }
         }
         TabLayoutMediator(binding.tabLayoutDetail, binding.viewPagerDetail) { tab, position ->
             tab.text = tabTitle[position]
@@ -79,6 +90,46 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+
+    private fun insertFavorite() {
+        if (!userFavoriteHelper.checkUser(userDetail.username)) {
+            val contentValues = contentValuesOf(
+                USERNAME to userDetail.username,
+                USER_TYPE to userDetail.userType,
+                AVATAR_URL to userDetail.avatarUrl
+            )
+            userFavoriteHelper.insert(contentValues)
+            setStateFab(true)
+            FancyToast.makeText(
+                this,
+                getString(R.string.add_to_favorite),
+                FancyToast.LENGTH_SHORT,
+                FancyToast.SUCCESS,
+                false
+            )
+        } else {
+            userFavoriteHelper.delete(userDetail.username)
+            setStateFab(false)
+            FancyToast.makeText(
+                this,
+                getString(R.string.remove_to_favorite),
+                FancyToast.LENGTH_SHORT,
+                FancyToast.SUCCESS,
+                false
+            )
+        }
+    }
+
+    private fun setStateFab(state: Boolean) =
+        if (state) binding.fabAddFavorite?.setImageResource(R.drawable.ic_heart_full)
+        else binding.fabAddFavorite?.setImageResource(R.drawable.ic_heart_border)
+
+    override fun onDestroy() {
+        super.onDestroy()
+        userFavoriteHelper.close()
+        _binding = null
     }
 
 }

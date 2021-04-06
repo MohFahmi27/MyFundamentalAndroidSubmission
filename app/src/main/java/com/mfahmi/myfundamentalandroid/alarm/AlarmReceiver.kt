@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.ui.activities.MainActivity
@@ -16,10 +15,9 @@ import java.util.*
 class AlarmReceiver : BroadcastReceiver() {
 
     companion object {
-        const val ID_DAILY = 101
-        const val EXTRA_TITLE = "title"
-        const val EXTRA_MESSAGE = "message"
-        private const val TAG = "AlarmReceiver"
+        private const val ID_DAILY = 101
+        private const val EXTRA_TITLE = "title"
+        private const val EXTRA_MESSAGE = "message"
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -27,22 +25,20 @@ class AlarmReceiver : BroadcastReceiver() {
             showDailyNotification(context!!, intent.getStringExtra(EXTRA_TITLE).toString(),
                     intent.getStringExtra(EXTRA_MESSAGE).toString())
         }
-        Log.d(TAG, "onReceive: Alarm Receive")
     }
 
     fun setDailyReminder(context: Context, title: String, message: String) {
-        Log.d(TAG, "setDailyReminder: ")
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.putExtra(EXTRA_MESSAGE, message)
         intent.putExtra(EXTRA_TITLE, title)
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 9)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-
         val pendingIntent = PendingIntent.getBroadcast(context, ID_DAILY, intent, 0)
-        alarmManager.setRepeating(
+        val calendar: Calendar = Calendar.getInstance().apply{
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 9)
+            set(Calendar.MINUTE, 0)
+        }
+        alarmManager.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
                 AlarmManager.INTERVAL_DAY,
@@ -74,8 +70,8 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun showDailyNotification(context: Context, title: String, message: String) {
-        val CHANNEL_ID = "github_notification_1"
-        val CHANNEL_NAME = "github_notification"
+        val channelId = "github_notification_1"
+        val channelName = "github_notification"
 
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -87,9 +83,9 @@ class AlarmReceiver : BroadcastReceiver() {
         val notificationManagerCompat =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(context, channelId)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.ic_github)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
@@ -99,14 +95,14 @@ class AlarmReceiver : BroadcastReceiver() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                    CHANNEL_ID,
-                    CHANNEL_NAME,
+                    channelId,
+                    channelName,
                     NotificationManager.IMPORTANCE_DEFAULT
             )
             channel.enableVibration(true)
             channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
 
-            builder.setChannelId(CHANNEL_ID)
+            builder.setChannelId(channelId)
             notificationManagerCompat.createNotificationChannel(channel)
         }
         notificationManagerCompat.notify(ID_DAILY, builder.build())

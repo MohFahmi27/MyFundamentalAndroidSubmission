@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFundamentalAndroid"
         tools:ignore="AllowBackup">
+        <provider
+            android:name=".provider.UserFavoriteProvider"
+            android:authorities="com.mfahmi.myfundamentalandroid.githubuser"
+            android:enabled="true"
+            android:exported="false" />
+        <activity android:name=".ui.activities.FavoriteActivity" />
         <activity
             android:name=".ui.activities.PreferenceActivity"
             android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
@@ -31,11 +37,11 @@
         <activity
             android:name=".ui.activities.DetailActivity"
             android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
+
         <receiver
             android:name=".alarm.AlarmReceiver"
             android:enabled="true"
-            android:exported="true"
-            tools:ignore="ExportedReceiver" />
+            android:exported="false" />
     </application>
 
 </manifest>
