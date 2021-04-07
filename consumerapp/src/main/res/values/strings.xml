@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Consumer App</string>
+    <string name="github_icon">github icon</string>
+    <string name="image_placeholder">Image Placeholder</string>
+    <string name="no_favorite_user">No Favorite User!</string>
+
+</resources>

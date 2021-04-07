@@ -4,13 +4,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:layout_width="match_parent"
+    android:padding="@dimen/dimen_value_small"
     xmlns:tools="http://schemas.android.com/tools"
     tools:background="@color/primaryColor">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="10dp"
-        android:layout_height="75dp"
+        android:layout_height="65dp"
         android:src="@drawable/shape_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

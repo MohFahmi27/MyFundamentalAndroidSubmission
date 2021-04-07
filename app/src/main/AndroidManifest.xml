@@ -4,6 +4,8 @@
     package="com.mfahmi.myfundamentalandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.mfahmi.myfundamentalandroid.READ_DATABASE" />
+    <uses-permission android:name="com.mfahmi.myfundamentalandroid.WRITE_DATABASE" />
 
     <application
         android:allowBackup="true"
@@ -15,10 +17,15 @@
         tools:ignore="AllowBackup">
         <provider
             android:name=".provider.UserFavoriteProvider"
-            android:authorities="com.mfahmi.myfundamentalandroid.githubuser"
+            android:authorities="com.mfahmi.myfundamentalandroid"
             android:enabled="true"
-            android:exported="false" />
-        <activity android:name=".ui.activities.FavoriteActivity" />
+            android:exported="false"
+            android:readPermission="com.fahmi.myfundamentalandroid.READ_DATABASE"
+            android:writePermission="com.fahmi.myfundamentalandroid.WRITE_DATABASE" />
+
+        <activity
+            android:name=".ui.activities.FavoriteActivity"
+            android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
         <activity
             android:name=".ui.activities.PreferenceActivity"
             android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
@@ -34,6 +41,7 @@
         <activity
             android:name=".ui.activities.MainActivity"
             android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
+
         <activity
             android:name=".ui.activities.DetailActivity"
             android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
@@ -43,5 +51,9 @@
             android:enabled="true"
             android:exported="false" />
     </application>
+
+    <queries>
+        <package android:name="com.mfahmi.myfundamentalandroid" />
+    </queries>
 
 </manifest>

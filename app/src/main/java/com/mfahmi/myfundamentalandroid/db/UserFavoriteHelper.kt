@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns._ID
 import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.TABLE_NAME
-import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.USERNAME
 import java.sql.SQLException
 
 class UserFavoriteHelper(context: Context) {
@@ -47,22 +46,21 @@ class UserFavoriteHelper(context: Context) {
             "$_ID ASC"
         )
 
-    fun checkUser(username: String): Boolean {
-        val cursor: Cursor = mySqlLiteDatabase.rawQuery(
-            "SELECT * FROM $TABLE_NAME WHERE $USERNAME = ?",
-            arrayOf(username)
+    fun queryById(idUser: String): Cursor =
+        mySqlLiteDatabase.query(
+            DATABASE_TABLE,
+            null,
+            "$_ID = ?",
+            arrayOf(idUser),
+            null,
+            null,
+            null,
+            null
         )
-        if (cursor.count > 0) {
-            cursor.close()
-            return true
-        }
-        cursor.close()
-        return false
-    }
 
     fun insert(values: ContentValues): Long =
         mySqlLiteDatabase.insert(DATABASE_TABLE, null, values)
 
-    fun delete(username: String): Int =
-        mySqlLiteDatabase.delete(DATABASE_TABLE, "$USERNAME = ?", arrayOf(username))
+    fun delete(idUser: String): Int =
+        mySqlLiteDatabase.delete(DATABASE_TABLE, "$_ID = ?", arrayOf(idUser))
 }

@@ -173,7 +173,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/dimen_value_big"
         android:contentDescription="@string/add_to_favorite"
-        android:src="@drawable/ic_heart_border"
         android:backgroundTint="@color/primaryColor"
         app:borderWidth="3dp"
         app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior" />

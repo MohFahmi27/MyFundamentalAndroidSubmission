@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.favorite_menu -> startActivity(Intent(this, FavoriteActivity::class.java))
             R.id.settings_menu -> startActivity(Intent(this, PreferenceActivity::class.java))
         }
         return super.onOptionsItemSelected(item)

@@ -15,7 +15,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         private const val DATABASE_VERSION = 1
 
         private const val SQL_CREATE_TABLE_FAVORITE = "CREATE TABLE ${DatabaseContract.TABLE_NAME} " +
-                " ($_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " ($_ID INTEGER PRIMARY KEY," +
                 " $USERNAME TEXT NOT NULL," +
                 " $USER_TYPE TEXT NOT NULL," +
                 " $AVATAR_URL TEXT NOT NULL);"

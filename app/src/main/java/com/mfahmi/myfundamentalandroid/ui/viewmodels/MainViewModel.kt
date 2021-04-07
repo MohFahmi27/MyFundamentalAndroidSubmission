@@ -34,6 +34,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                                 githubUser.getJSONObject(i).run {
                                     listUser.add(
                                         User(
+                                            this.getInt("id"),
                                             this.getString("login"),
                                             this.getString("type"),
                                             this.getString("avatar_url")

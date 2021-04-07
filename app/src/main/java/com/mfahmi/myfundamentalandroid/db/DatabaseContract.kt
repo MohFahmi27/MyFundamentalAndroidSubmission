@@ -5,7 +5,7 @@ import android.provider.BaseColumns
 
 class DatabaseContract: BaseColumns {
     companion object {
-        const val AUTHORITY = "com.mfahmi.myfundamentalandroid.githubuser"
+        const val AUTHORITY = "com.mfahmi.myfundamentalandroid"
         const val SCHEME = "content"
 
         const val TABLE_NAME = "tb_favorite_user"

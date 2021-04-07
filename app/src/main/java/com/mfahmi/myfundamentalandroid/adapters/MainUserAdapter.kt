@@ -51,13 +51,32 @@ class MainUserAdapter(private val context: Context) :
                 tvNama.text = user.username
                 tvUsername.text = user.userType
             }
-            itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_DETAIL, user)
-                itemView.context.startActivity(intent)
-            }
+            itemView.setOnClickListener(
+                CustomOnItemClickListener(
+                    adapterPosition,
+                    object : CustomOnItemClickListener.OnItemClickCallback {
+                        override fun onItemClicked(view: View, position: Int) {
+                            val intent = Intent(itemView.context, DetailActivity::class.java)
+                            intent.putExtra(DetailActivity.EXTRA_DETAIL, user)
+                            itemView.context.startActivity(intent)
+                        }
+                    })
+            )
         }
     }
 }
 
+class CustomOnItemClickListener(
+    private val position: Int,
+    private val onItemClickCallback: OnItemClickCallback
+) : View.OnClickListener {
+
+    interface OnItemClickCallback {
+        fun onItemClicked(view: View, position: Int)
+    }
+
+    override fun onClick(v: View?) {
+        onItemClickCallback.onItemClicked(v!!, position)
+    }
+}
 

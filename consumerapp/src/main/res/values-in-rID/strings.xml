@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Aplikasi</string>
+    <string name="github_icon">github logo</string>
+    <string name="image_placeholder">Gambar Placeholder</string>
+    <string name="no_favorite_user">Tidak ada User Favorite</string>
+</resources>
