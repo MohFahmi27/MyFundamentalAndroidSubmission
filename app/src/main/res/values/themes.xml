@@ -25,4 +25,9 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="fontFamily">@font/arial_rounded</item>
     </style>
+
+    <style name="ThemeOverlay.MyFundamentalAndroid.AppWidgetContainer" parent="">
+        <item name="appWidgetBackgroundColor">@color/light_blue_600</item>
+        <item name="appWidgetTextColor">@color/light_blue_50</item>
+    </style>
 </resources>

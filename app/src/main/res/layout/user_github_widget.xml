@@ -1,0 +1,50 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    android:padding="@dimen/widget_margin"
+    android:theme="@style/ThemeOverlay.MyFundamentalAndroid.AppWidgetContainer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/title_widget"
+            style="@style/DefaultTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/primaryColor"
+            android:gravity="center"
+            android:text="@string/favorite_user"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/list_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:loopViews="true"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/empty_view"
+        style="@style/DefaultTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_favorite_user"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:visibility="gone"
+        app:drawableTopCompat="@drawable/ic_search_place_holder" />
+
+</FrameLayout>

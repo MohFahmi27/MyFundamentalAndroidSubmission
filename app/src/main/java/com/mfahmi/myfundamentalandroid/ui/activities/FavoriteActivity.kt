@@ -19,8 +19,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class FavoriteActivity : AppCompatActivity() {
-    private var _binding: ActivityFavoriteBinding? = null
-    private val binding = _binding!!
+    private lateinit var binding: ActivityFavoriteBinding
     private lateinit var adapter: MainUserAdapter
 
     companion object {
@@ -29,8 +28,9 @@ class FavoriteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityFavoriteBinding.inflate(layoutInflater)
+        binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.backToolbar.setOnClickListener { finish() }
 
         initRecyclerView()
         val handlerThread = HandlerThread("DataObserver")
@@ -96,10 +96,5 @@ class FavoriteActivity : AppCompatActivity() {
             binding.placeholderImg.visibility = View.GONE
             binding.placeholderText.visibility = View.GONE
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

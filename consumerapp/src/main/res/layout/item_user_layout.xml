@@ -9,13 +9,11 @@
     android:layout_marginEnd="8dp"
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
-    app:cardBackgroundColor="@color/primaryColor"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/primaryColor">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView"
@@ -36,17 +34,17 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:civ_border_color="@color/secondaryDarkColor"
+            app:civ_border_color="@color/secondaryTextColor"
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/user1"/>
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/tv_nama"
             style="@style/DefaultTextView"
+            android:textColor="@color/secondaryTextColor"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:textSize="16sp"
@@ -63,7 +61,7 @@
             android:id="@+id/tv_username"
             style="@style/DefaultTextView"
             android:layout_marginTop="8dp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_nama"
             app:layout_constraintHorizontal_bias="0.0"

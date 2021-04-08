@@ -24,4 +24,6 @@
     <string name="add_to_favorite">Tambahkan ke Favorite</string>
     <string name="remove_to_favorite">Dihapus dari Favorite</string>
     <string name="no_favorite_user">Tidak ada User Favorit!</string>
+    <string name="back_button">Tombol Kembali</string>
+    <string name="favorite_user">Favorit User And %s</string>
 </resources>

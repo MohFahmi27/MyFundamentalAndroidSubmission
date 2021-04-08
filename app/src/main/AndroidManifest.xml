@@ -4,8 +4,14 @@
     package="com.mfahmi.myfundamentalandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.mfahmi.myfundamentalandroid.READ_DATABASE" />
     <uses-permission android:name="com.mfahmi.myfundamentalandroid.WRITE_DATABASE" />
+
+    <queries>
+        <package android:name="com.mfahmi.myfundamentalandroid" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -15,13 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFundamentalAndroid"
         tools:ignore="AllowBackup">
+
         <provider
             android:name=".provider.UserFavoriteProvider"
             android:authorities="com.mfahmi.myfundamentalandroid"
             android:enabled="true"
-            android:exported="false"
-            android:readPermission="com.fahmi.myfundamentalandroid.READ_DATABASE"
-            android:writePermission="com.fahmi.myfundamentalandroid.WRITE_DATABASE" />
+            android:exported="true"
+            android:readPermission="com.mfahmi.myfundamentalandroid.READ_DATABASE"
+            android:writePermission="com.mfahmi.myfundamentalandroid.WRITE_DATABASE" />
 
         <activity
             android:name=".ui.activities.FavoriteActivity"
@@ -41,7 +48,6 @@
         <activity
             android:name=".ui.activities.MainActivity"
             android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
-
         <activity
             android:name=".ui.activities.DetailActivity"
             android:theme="@style/Theme.MyFundamentalAndroid.NoActionBar" />
@@ -50,10 +56,21 @@
             android:name=".alarm.AlarmReceiver"
             android:enabled="true"
             android:exported="false" />
-    </application>
 
-    <queries>
-        <package android:name="com.mfahmi.myfundamentalandroid" />
-    </queries>
+        <service
+            android:name="com.mfahmi.myfundamentalandroid.ui.widget.UserGithubWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver android:name="com.mfahmi.myfundamentalandroid.ui.widget.UserGithubWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/user_github_widget_info" />
+        </receiver>
+
+    </application>
 
 </manifest>

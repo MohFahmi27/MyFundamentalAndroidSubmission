@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:background="@color/primaryColor">
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="@dimen/dimen_value_small"
+        android:layout_marginTop="@dimen/dimen_value_super_small"
+        android:layout_marginBottom="@dimen/dimen_value_small"
+        android:src="@drawable/shape_item"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/img_user_widget"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/dimen_value_standard"
+        android:layout_marginEnd="@dimen/dimen_value_standard"
+        android:contentDescription="@string/github_icon"
+        android:src="@drawable/ic_github"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_username_widget"
+            style="@style/DefaultTextView"
+            android:layout_marginStart="@dimen/dimen_value_standard"
+            android:layout_marginTop="@dimen/dimen_value_standard"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_user_type_widget"
+            style="@style/DefaultTextView"
+            android:layout_marginStart="@dimen/dimen_value_standard"
+            android:layout_marginTop="@dimen/dimen_value_small"
+            android:layout_marginBottom="@dimen/dimen_value_standard"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

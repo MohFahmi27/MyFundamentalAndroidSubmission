@@ -50,8 +50,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/imageView2"
                     app:layout_constraintStart_toStartOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="@+id/imageView2"
-                    app:layout_constraintVertical_bias="0.62"
-                    tools:src="@drawable/user1" />
+                    app:layout_constraintVertical_bias="0.62" />
 
                 <TextView
                     android:id="@+id/tv_name_detail"
@@ -118,13 +117,13 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin">
 
-                <androidx.appcompat.widget.AppCompatImageButton
+                <ImageView
                     android:id="@+id/btn_back_toolbar"
                     style="@style/Theme.AppCompat.Light"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:contentDescription="@string/back_button" />
 
                 <ImageView
                     android:layout_width="24dp"

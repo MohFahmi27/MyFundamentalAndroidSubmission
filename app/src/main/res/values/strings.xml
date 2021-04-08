@@ -27,6 +27,8 @@
     <string name="add_to_favorite">Add to Favorite</string>
     <string name="remove_to_favorite">Remove to Favorite</string>
     <string name="no_favorite_user">No Favorite User!</string>
+    <string name="back_button">Back Button</string>
+    <string name="favorite_user">Your Favorite User</string>
 
     <string-array name="tab_title">
         <item>@string/followers_title</item>
