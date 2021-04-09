@@ -45,6 +45,11 @@ class AppPreferenceFragment : PreferenceFragmentCompat(), SharedPreferences.OnSh
         preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
     }
 
+    override fun onPause() {
+        super.onPause()
+        preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
+    }
+
     private fun init() {
         NOTIFICATION_KEY = resources.getString(R.string.notification)
         LANGUAGE_KEY = resources.getString(R.string.language)

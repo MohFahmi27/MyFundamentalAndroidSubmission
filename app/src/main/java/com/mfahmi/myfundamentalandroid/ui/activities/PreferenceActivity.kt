@@ -8,12 +8,11 @@ import com.mfahmi.myfundamentalandroid.databinding.ActivityPreferenceBinding
 import com.mfahmi.myfundamentalandroid.ui.fragments.AppPreferenceFragment
 
 class PreferenceActivity : AppCompatActivity() {
-    private var _binding: ActivityPreferenceBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityPreferenceBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityPreferenceBinding.inflate(layoutInflater)
+        binding = ActivityPreferenceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnBackToolbar.setOnClickListener { finish() }
 
