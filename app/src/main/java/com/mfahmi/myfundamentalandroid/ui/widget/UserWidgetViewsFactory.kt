@@ -7,23 +7,19 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.mfahmi.myfundamentalandroid.R
 import com.mfahmi.myfundamentalandroid.db.DatabaseContract.Companion.CONTENT_URI
-import com.mfahmi.myfundamentalandroid.db.UserFavoriteHelper
 import com.mfahmi.myfundamentalandroid.helper.MappingHelper
 import com.mfahmi.myfundamentalandroid.model.User
 
 internal class UserWidgetViewsFactory(private val context: Context) :
     RemoteViewsService.RemoteViewsFactory {
     private val userWidgetItems = ArrayList<User>()
-    private lateinit var userFavoriteHelper: UserFavoriteHelper
     private var cursor: Cursor? = null
 
     override fun onCreate() {
     }
 
     override fun onDataSetChanged() {
-        if (cursor != null) {
-            cursor!!.close()
-        }
+        cursor?.close()
 
         val identityToken = Binder.clearCallingIdentity()
         cursor = context.contentResolver.query(
@@ -38,8 +34,8 @@ internal class UserWidgetViewsFactory(private val context: Context) :
     }
 
     override fun onDestroy() {
-        userFavoriteHelper.close()
         userWidgetItems.clear()
+        cursor?.close()
     }
 
     override fun getCount(): Int = userWidgetItems.size

@@ -14,18 +14,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress_bar_followers"
+        style="?android:attr/progressBarStyle"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        style="?android:attr/progressBarStyle"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/placeholder_img"
@@ -43,9 +42,9 @@
     <TextView
         android:id="@+id/placeholder_text"
         style="@style/DefaultTextView"
-        android:textAlignment="center"
-        android:text="@string/no_result_text"
         android:layout_marginTop="@dimen/dimen_value_super_small"
+        android:text="@string/no_result_text"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/placeholder_img"

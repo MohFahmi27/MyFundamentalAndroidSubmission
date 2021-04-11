@@ -18,7 +18,7 @@ class FollowingViewModel(application: Application): AndroidViewModel(application
     internal fun setFollowingList(userLogin: String) {
         AsyncHttpClient().apply { addHeader("User-Agent", "request") }
             .apply { addHeader("Authorization", ApiToken.TOKEN_GITHUB_KEY) }
-            .get(" https://api.github.com/users/$userLogin/following", object :
+            .get("https://api.github.com/users/$userLogin/following", object :
                 AsyncHttpResponseHandler() {
                 override fun onSuccess(
                     statusCode: Int,

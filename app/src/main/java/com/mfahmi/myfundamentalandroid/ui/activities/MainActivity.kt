@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var adapter: MainUserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private fun getDataUser() {
         with(binding) {
             rvMain.layoutManager = LinearLayoutManager(this@MainActivity)
-            val adapter = MainUserAdapter(applicationContext)
+            adapter = MainUserAdapter(applicationContext)
             rvMain.adapter = adapter
 
             mainViewModel.getUserSearch().observe(this@MainActivity) {
@@ -84,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.arrayListUser.clear()
                 query?.let {
                     loadingBarVisibility(true)
                     mainViewModel.setUserSearch(it)

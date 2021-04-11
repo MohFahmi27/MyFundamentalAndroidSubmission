@@ -8,6 +8,7 @@ import android.content.Intent
 import android.widget.RemoteViews
 import androidx.core.net.toUri
 import com.mfahmi.myfundamentalandroid.R
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class UserGithubWidget : AppWidgetProvider() {
 
@@ -38,7 +39,10 @@ class UserGithubWidget : AppWidgetProvider() {
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
             views.setPendingIntentTemplate(R.id.list_widget, toastPendingIntent)
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.layout.user_github_widget)
+            appWidgetManager.notifyAppWidgetViewDataChanged(
+                appWidgetId,
+                R.layout.user_github_widget
+            )
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }
@@ -53,7 +57,34 @@ class UserGithubWidget : AppWidgetProvider() {
         }
     }
 
+    override fun onDisabled(context: Context?) {
+        super.onDisabled(context)
+        FancyToast.makeText(
+            context,
+            context!!.resources.getString(R.string.widget_remove_message),
+            FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false
+        ).show()
+    }
+
+    override fun onEnabled(context: Context?) {
+        super.onEnabled(context)
+        FancyToast.makeText(
+            context,
+            context!!.resources.getString(R.string.widget_enable_message),
+            FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false
+        ).show()
+    }
+
     override fun onReceive(context: Context?, intent: Intent?) {
+        intent!!.action.let {
+            if (intent.action == TOAST_ACTION) {
+                FancyToast.makeText(
+                    context,
+                    context!!.resources.getString(R.string.favorite_user),
+                    FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false
+                ).show()
+            }
+        }
         super.onReceive(context, intent)
     }
 }

@@ -125,8 +125,8 @@
                 <ImageView
                     android:id="@+id/btn_back_toolbar"
                     style="@style/Theme.AppCompat.Light"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/ic_baseline_arrow_back_ios_24"
                     android:contentDescription="@string/back_button" />
 
@@ -180,5 +180,19 @@
         android:contentDescription="@string/add_to_favorite"
         app:borderWidth="3dp"
         app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior" />
+
+    <LinearLayout
+        android:id="@+id/lyt_screen_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/primaryColor">
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

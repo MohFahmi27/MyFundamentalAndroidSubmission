@@ -13,8 +13,7 @@ import com.mfahmi.myfundamentalandroid.ui.activities.DetailActivity
 import com.mfahmi.myfundamentalandroid.ui.viewmodels.FollowersViewModel
 
 class FollowersFragment : Fragment() {
-    private var _binding: FragmentFollowersBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentFollowersBinding
     private lateinit var fragmentsViewModel: FollowersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class FollowersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFollowersBinding.inflate(inflater, container, false)
+        binding = FragmentFollowersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -80,10 +79,5 @@ class FollowersFragment : Fragment() {
 
     private fun loadingBarVisibility(progressBarState: Boolean) =
         if (progressBarState) binding.progressBarFollowers.visibility = View.VISIBLE
-        else binding.progressBarFollowers.visibility = View.GONE
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+        else binding.progressBarFollowers.visibility = View.INVISIBLE
 }

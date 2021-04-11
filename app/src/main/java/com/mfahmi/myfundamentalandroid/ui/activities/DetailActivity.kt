@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.BaseColumns._ID
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.contentValuesOf
 import androidx.lifecycle.ViewModelProvider
@@ -47,6 +48,7 @@ class DetailActivity : AppCompatActivity() {
             ViewModelProvider.AndroidViewModelFactory(application)
         ).get(DetailViewModel::class.java)
 
+        loadingScreenVisibility(true)
         initData()
         addDataToView()
         uriWithId = Uri.parse("$CONTENT_URI/${userDetail.id}")
@@ -95,6 +97,7 @@ class DetailActivity : AppCompatActivity() {
         with(binding) {
             detailViewModel.getUserSearch().observe(this@DetailActivity) {
                 it?.let {
+                    loadingScreenVisibility(false)
                     tvToolbarName.text = it.userName
                     tvNameDetail.text = it.userName
                     tvUsernameDetail.text = it.login
@@ -145,6 +148,16 @@ class DetailActivity : AppCompatActivity() {
                 FancyToast.WARNING,
                 false
             ).show()
+        }
+    }
+
+    private fun loadingScreenVisibility(state: Boolean) {
+        if (!state) {
+            binding.lytScreenLoading.visibility = View.GONE
+            binding.fabAddFavorite.visibility = View.VISIBLE
+        } else {
+            binding.lytScreenLoading.visibility = View.VISIBLE
+            binding.fabAddFavorite.visibility = View.INVISIBLE
         }
     }
 

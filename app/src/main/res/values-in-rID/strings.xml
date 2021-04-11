@@ -26,4 +26,6 @@
     <string name="no_favorite_user">Tidak ada User Favorit!</string>
     <string name="back_button">Tombol Kembali</string>
     <string name="favorite_user">Favorit User And %s</string>
+    <string name="widget_remove_message">Widget Telah Dihapus</string>
+    <string name="widget_enable_message">Widget Telah Ditambahkan</string>
 </resources>
