@@ -28,6 +28,7 @@ This is submission for android fundamental course in <a href="https://www.dicodi
   <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/user_not_found.jpg" alt="Main Activity User Not Found" width="200"/>
   <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/favorite.jpg" alt="Favorites" width="200"/>
   <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/widget.jpg" alt="Widget" width="200"/>
+  <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/settings.jpg" alt="Reminder" width="200"/>
   <img src="https://github.com/MohFahmi27/MyFundamentalAndroidSubmission/blob/master/img/reminder.jpg" alt="Reminder" width="200"/>
 </p>
 
